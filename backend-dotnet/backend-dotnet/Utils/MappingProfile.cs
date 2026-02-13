@@ -9,5 +9,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<CreatePersonDTO, Person>();
+        CreateMap<UpdatePersonDTO, Person>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }
