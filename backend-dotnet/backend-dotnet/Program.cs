@@ -47,6 +47,7 @@ builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<PersonService>();
+builder.Services.AddScoped<CategoriesService>();
 builder.Services.AddScoped<UnitOfService>();
 
 var app = builder.Build();

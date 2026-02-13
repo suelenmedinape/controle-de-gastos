@@ -9,6 +9,7 @@ public class UnitOfService
     private readonly IMapper mapper;
 
     private PersonService personService;
+    private CategoriesService categoriesService;
     
     public UnitOfService(UnitOfWork unit, IMapper mapper)
     {
@@ -17,4 +18,5 @@ public class UnitOfService
     }
     
     public PersonService PersonService => personService ??= new PersonService(unit, mapper);
+    public CategoriesService CategoriesService => categoriesService ??= new CategoriesService(unit, mapper);
 }

@@ -4,6 +4,21 @@
         <name>backend-dotnet</name>
     </assembly>
     <members>
+        <member name="M:backend_dotnet.Controller.CategoriesController.ListCategories">
+            <summary>
+            Listar todas as categorias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:backend_dotnet.Controller.CategoriesController.CreateCategory(backend_dotnet.DTO.Categories.CreateCategoryDTO)">
+            <summary>
+            Criar uma nova categoria
+            </summary>
+            <param name="dto">Dados da categoria</param>
+            <returns>Retorna o id da categoria criada</returns>
+            <response code="201">Categoria criada com sucesso</response>
+            <response code="400">Um ou mais erros de validação ocorreram</response>
+        </member>
         <member name="M:backend_dotnet.Controller.PersonController.ListPersonById(System.Guid)">
             <summary>
             Lista todas as pessoas
