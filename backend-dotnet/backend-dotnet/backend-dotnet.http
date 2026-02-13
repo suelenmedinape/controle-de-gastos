@@ -1,6 +1,11 @@
 @backend_dotnet_HostAddress = http://localhost:5124
 
-GET {{backend_dotnet_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{backend_dotnet_HostAddress}}/Person
+Content-Type: application/json
+
+{
+    "name": "suelen",
+    "age": 23
+}
 
 ###
