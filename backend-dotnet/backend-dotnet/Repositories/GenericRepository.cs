@@ -13,6 +13,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _context = context;
     }
     
+    public async Task<T?> findById(Guid id)
+    {
+        return await _context.Set<T>().FindAsync(id);
+    }
+    
     public async Task<List<T>> ListAll()
     {
         return await _context.Set<T>().ToListAsync();

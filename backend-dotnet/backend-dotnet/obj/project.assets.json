@@ -3469,7 +3469,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Proxies >= 9.0.2",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.1",
-      "Swashbuckle.AspNetCore >= 9.0.1"
+      "Swashbuckle.AspNetCore >= 9.0.1",
+      "Swashbuckle.AspNetCore.SwaggerUI >= 9.0.1"
     ]
   },
   "packageFolders": {
@@ -3547,6 +3548,10 @@
             "version": "[9.0.1, )"
           },
           "Swashbuckle.AspNetCore": {
+            "target": "Package",
+            "version": "[9.0.1, )"
+          },
+          "Swashbuckle.AspNetCore.SwaggerUI": {
             "target": "Package",
             "version": "[9.0.1, )"
           }
