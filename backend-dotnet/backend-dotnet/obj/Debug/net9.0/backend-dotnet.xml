@@ -61,7 +61,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:backend_dotnet.Controller.TransactionController.CreateCategory(backend_dotnet.DTO.Person.Transaction.CreateTransactionDTO)">
+        <member name="M:backend_dotnet.Controller.TransactionController.CreateTransaction(backend_dotnet.DTO.Person.Transaction.CreateTransactionDTO)">
             <summary>
             Criar uma nova transação
             </summary>
