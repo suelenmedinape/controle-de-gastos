@@ -21,7 +21,6 @@ public class CategoriesService
     {
         try
         {
-            // FALTA TERMINAR
             var categories = await unit.CategoriesRepository.ListAll();
             var categoriesDto = mapper.Map<List<ListCategoryDTO>>(categories);
             

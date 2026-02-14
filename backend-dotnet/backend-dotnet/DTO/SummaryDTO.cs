@@ -2,7 +2,7 @@ namespace backend_dotnet.DTO.Person;
 
 public class SummaryDTO
 {
-    public int totalIncome { get; set; }
-    public int totalExpenses { get; set; }
-    public int netBalance { get; set; }
+    public decimal totalIncome { get; set; }
+    public decimal totalExpenses { get; set; }
+    public decimal netBalance { get; set; }
 }

@@ -6,6 +6,7 @@
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/backend-dotnet.runtimeconfig.json
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/backend-dotnet.dll
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/backend-dotnet.pdb
+/home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/backend-dotnet.xml
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/AutoMapper.dll
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/Castle.Core.dll
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/FluentResults.dll
@@ -138,8 +139,7 @@
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-.B2C7BE29.Up2Date
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-dotnet.dll
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/refint/backend-dotnet.dll
+/home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-dotnet.xml
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-dotnet.pdb
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-dotnet.genruntimeconfig.cache
 /home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/ref/backend-dotnet.dll
-/home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/bin/Debug/net9.0/backend-dotnet.xml
-/home/suelen/Documents/teste tecnico/controle-de-gastos/backend-dotnet/backend-dotnet/obj/Debug/net9.0/backend-dotnet.xml

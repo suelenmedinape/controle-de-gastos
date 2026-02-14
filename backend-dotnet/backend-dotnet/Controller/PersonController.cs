@@ -21,21 +21,9 @@ public class PersonController : ControllerBase
     /// <summary>
     /// Lista todas as pessoas
     /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> ListPersonById(Guid id)
-    {
-        var result = await service.PersonService.ListPersonsById(id);
-        return result.IsSuccess
-            ? Ok(result.Successes.FirstOrDefault())
-            : StatusCode(404, result.Errors.FirstOrDefault()); 
-    }
-    
-    /// <summary>
-    /// Lista todas as pessoas
-    /// </summary>
-    /// <returns></returns>
+    /// <returns>Retorna uma lista de pessoas</returns>
+    /// <response code="201">Sucesso ao buscar pessoas</response>
+    /// <response code="404">Nenhuma pessoa encontrada</response>
     [HttpGet]
     public async Task<IActionResult> ListAllPerson()
     {
@@ -51,7 +39,7 @@ public class PersonController : ControllerBase
     /// <param name="dto">Dados para cadastro</param>
     /// <returns>Retorna o id da pessoa criada</returns>
     /// <response code="201">Cadastro realizado com sucesso</response>
-    /// <response code="400">Um ou mais erros de validação ocorreram</response>
+    /// <response code="400">Um ou mais erros ocorreram</response>
     [HttpPost]
     public async Task<IActionResult> CreatePerson([FromBody] CreatePersonDTO dto)
     {
@@ -68,7 +56,7 @@ public class PersonController : ControllerBase
     /// <param name="dto">Dados para atualizar</param>
     /// <returns>Retorna uma mensagem</returns>
     /// <response code="201">Cadastro realizado com sucesso</response>
-    /// <response code="400">Um ou mais erros de validação ocorreram</response>
+    /// <response code="400">Um ou mais erros ocorreram</response>
     [HttpPut]
     [Route("{id}")]
     public async Task<IActionResult> UpdatePerson(Guid id, [FromBody] UpdatePersonDTO dto)
@@ -76,6 +64,23 @@ public class PersonController : ControllerBase
         var result = await service.PersonService.UpdatePerson(id, dto);
         return result.IsSuccess
             ? Ok(result.Successes.FirstOrDefault())
-            : StatusCode(400, result.Errors.FirstOrDefault()); 
+            : StatusCode(404, result.Errors.FirstOrDefault()); 
+    }
+    
+    /// <summary>
+    /// Deleta a pessoas e as transações
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Não retorna nada no corpo</returns>
+    /// <response code="201">Cadastro realizado com sucesso</response>
+    /// <response code="400">Um ou mais erros ocorreram</response>
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> DeletePerson(Guid id)
+    {
+        var result = await service.PersonService.DeletePerson(id);
+        return result.IsSuccess
+            ? Ok(result.Successes.FirstOrDefault())
+            : StatusCode(404, result.Errors.FirstOrDefault()); 
     }
 }

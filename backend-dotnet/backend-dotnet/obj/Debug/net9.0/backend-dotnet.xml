@@ -19,17 +19,13 @@
             <response code="201">Categoria criada com sucesso</response>
             <response code="400">Um ou mais erros de validação ocorreram</response>
         </member>
-        <member name="M:backend_dotnet.Controller.PersonController.ListPersonById(System.Guid)">
-            <summary>
-            Lista todas as pessoas
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:backend_dotnet.Controller.PersonController.ListAllPerson">
             <summary>
             Lista todas as pessoas
             </summary>
-            <returns></returns>
+            <returns>Retorna uma lista de pessoas</returns>
+            <response code="201">Sucesso ao buscar pessoas</response>
+            <response code="404">Nenhuma pessoa encontrada</response>
         </member>
         <member name="M:backend_dotnet.Controller.PersonController.CreatePerson(backend_dotnet.DTO.Person.CreatePersonDTO)">
             <summary>
@@ -38,7 +34,7 @@
             <param name="dto">Dados para cadastro</param>
             <returns>Retorna o id da pessoa criada</returns>
             <response code="201">Cadastro realizado com sucesso</response>
-            <response code="400">Um ou mais erros de validação ocorreram</response>
+            <response code="400">Um ou mais erros ocorreram</response>
         </member>
         <member name="M:backend_dotnet.Controller.PersonController.UpdatePerson(System.Guid,backend_dotnet.DTO.Person.UpdatePersonDTO)">
             <summary>
@@ -48,7 +44,47 @@
             <param name="dto">Dados para atualizar</param>
             <returns>Retorna uma mensagem</returns>
             <response code="201">Cadastro realizado com sucesso</response>
+            <response code="400">Um ou mais erros ocorreram</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.PersonController.DeletePerson(System.Guid)">
+            <summary>
+            Deleta a pessoas e as transações
+            </summary>
+            <param name="id"></param>
+            <returns>Não retorna nada no corpo</returns>
+            <response code="201">Cadastro realizado com sucesso</response>
+            <response code="400">Um ou mais erros ocorreram</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.TransactionController.ListTransactions">
+            <summary>
+            Listar todas as transações
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:backend_dotnet.Controller.TransactionController.CreateCategory(backend_dotnet.DTO.Person.Transaction.CreateTransactionDTO)">
+            <summary>
+            Criar uma nova transação
+            </summary>
+            <param name="dto">Dados da transação</param>
+            <returns>Retorna o id da transação criada</returns>
+            <response code="201">transação criada com sucesso</response>
             <response code="400">Um ou mais erros de validação ocorreram</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.TransactionController.GetTotalsByPerson">
+            <summary>
+            Listar todas as pessoas cadastradas com os dados dos gastos
+            </summary>
+            <returns>Retorna uma lista de pessoas</returns>
+            <response code="201">Sucesso ao buscar dados</response>
+            <response code="404">Nenhuma pessoa encontrada</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.TransactionController.GetTotalsByCategory">
+            <summary>
+            Listar todas as categorias cadastradas com os dados dos gastos
+            </summary>
+            <returns>Retorna uma lista de categorias</returns>
+            <response code="201">Sucesso ao buscar dados</response>
+            <response code="404">Nenhuma pessoa encontrada</response>
         </member>
         <member name="T:backend_dotnet.Migrations.InitialCreate">
             <inheritdoc />
@@ -72,6 +108,18 @@
             <inheritdoc />
         </member>
         <member name="M:backend_dotnet.Migrations.UpdateEntitiePerson.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:backend_dotnet.Migrations.Update">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.Update.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.Update.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.Update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

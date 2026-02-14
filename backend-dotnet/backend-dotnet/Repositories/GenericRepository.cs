@@ -37,4 +37,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         _context.Set<T>().Remove(entity);
     }
+    
+    public IQueryable<T> Query()
+    {
+        return _context.Set<T>().AsQueryable();
+    }
 }

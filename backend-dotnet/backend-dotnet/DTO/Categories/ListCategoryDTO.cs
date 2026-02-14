@@ -1,11 +1,13 @@
+using backend_dotnet.Enum;
+
 namespace backend_dotnet.DTO.Categories;
 
 public class ListCategoryDTO
 {
     public Guid Id { get; set; }
     public string Description { get; set; }
-    public int Purpose { get; set; }
-    public int TotalIncome { get; set; }
-    public int TotalExpenses { get; set; }
-    public int Balance { get; set; }
+    public Finance Purpose { get; set; }
+    public decimal TotalIncome { get; set; }
+    public decimal TotalExpenses { get; set; }
+    public decimal Balance { get; set; }
 }
