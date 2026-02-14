@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>backend-dotnet</name>
+    </assembly>
+    <members>
+        <member name="M:backend_dotnet.Controller.CategoriesController.ListCategories">
+            <summary>
+            Listar todas as categorias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:backend_dotnet.Controller.CategoriesController.CreateCategory(backend_dotnet.DTO.Categories.CreateCategoryDTO)">
+            <summary>
+            Criar uma nova categoria
+            </summary>
+            <param name="dto">Dados da categoria</param>
+            <returns>Retorna o id da categoria criada</returns>
+            <response code="201">Categoria criada com sucesso</response>
+            <response code="400">Um ou mais erros de validação ocorreram</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.PersonController.ListPersonById(System.Guid)">
+            <summary>
+            Lista todas as pessoas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:backend_dotnet.Controller.PersonController.ListAllPerson">
+            <summary>
+            Lista todas as pessoas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:backend_dotnet.Controller.PersonController.CreatePerson(backend_dotnet.DTO.Person.CreatePersonDTO)">
+            <summary>
+            Registrar uma pessoa no sistema
+            </summary>
+            <param name="dto">Dados para cadastro</param>
+            <returns>Retorna o id da pessoa criada</returns>
+            <response code="201">Cadastro realizado com sucesso</response>
+            <response code="400">Um ou mais erros de validação ocorreram</response>
+        </member>
+        <member name="M:backend_dotnet.Controller.PersonController.UpdatePerson(System.Guid,backend_dotnet.DTO.Person.UpdatePersonDTO)">
+            <summary>
+            Atualizar os dados
+            </summary>
+            <param name="id">Id da pessoa</param>
+            <param name="dto">Dados para atualizar</param>
+            <returns>Retorna uma mensagem</returns>
+            <response code="201">Cadastro realizado com sucesso</response>
+            <response code="400">Um ou mais erros de validação ocorreram</response>
+        </member>
+        <member name="T:backend_dotnet.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:backend_dotnet.Migrations.UpdateEntitiePerson">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.UpdateEntitiePerson.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.UpdateEntitiePerson.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:backend_dotnet.Migrations.UpdateEntitiePerson.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
