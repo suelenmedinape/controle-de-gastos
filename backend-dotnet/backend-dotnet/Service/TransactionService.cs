@@ -46,13 +46,15 @@ public class TransactionService
                 throw new Exception("Pessosas menores de 18 podem ter apenas despesas");
             }
             
+            var category = await unit.CategoriesRepository.findById(dto.CategoryId) ?? throw new Exception("Categoria não encontrada");
+            
             var transaction = mapper.Map<Transaction>(dto);
             
             unit.TransactionRepository.Add(transaction);
             await unit.CommitAsync();
             
             return new Result()
-                .WithSuccess(new Success("Categoria criada com sucesso")
+                .WithSuccess(new Success("Transação criada com sucesso")
                     .WithMetadata("data", transaction.Id));
         }
         catch (Exception e)

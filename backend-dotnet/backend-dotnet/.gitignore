@@ -1,0 +1,13 @@
+# .NET
+bin/
+obj/
+
+# Rider
+.idea/
+
+# VSCode
+.vscode/
+
+# User files
+*.user
+*.suo

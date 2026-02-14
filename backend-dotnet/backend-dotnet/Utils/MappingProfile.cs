@@ -1,6 +1,7 @@
 using AutoMapper;
 using backend_dotnet.DTO.Categories;
 using backend_dotnet.DTO.Person;
+using backend_dotnet.DTO.Person.Transaction;
 using backend_dotnet.Entities;
 
 namespace backend_dotnet.Utils;
@@ -15,5 +16,8 @@ public class MappingProfile : Profile
         
         CreateMap<CreateCategoryDTO, Categories>();
         CreateMap<Categories, ListCategoryDTO>();
+        
+        CreateMap<CreateTransactionDTO, Transaction>();
+        CreateMap<Transaction, ListAllTransactionsDTO>();
     }
 }
