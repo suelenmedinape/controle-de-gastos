@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBarComponent";
+import NavBar from "./components/NavBar/nav-bar-component";
+import TableRecords from "./components/Table/table-records-component";
+import TableTransaction from "./components/Table/table-transaction-component";
+import TableReport from "./components/Table/table-report-component";
 
 export default function App() {
   return (
@@ -7,11 +10,11 @@ export default function App() {
       <NavBar />
       <main className="flex-1 overflow-y-auto pt-16 lg:pt-0">
         <Routes>
-          {/* vazio pois ainda nao tenho as paginas */}
-          {/* <Route path="/" element={} />
-          <Route path="/pessoas" element={} />
-          <Route path="/categorias" element={} />
-          <Route path="/transacoes" element={} /> */}
+          <Route path="/person" element={<TableRecords />} />
+          <Route path="/category" element={<TableRecords />} />
+          <Route path="/transaction" element={<TableTransaction />} />
+          <Route path="/byPerson" element={<TableReport />} />
+          <Route path="/byCategory" element={<TableReport />} />
         </Routes>
       </main>
     </div>
