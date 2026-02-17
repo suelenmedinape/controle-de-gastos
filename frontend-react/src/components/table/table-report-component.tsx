@@ -2,8 +2,11 @@ import { ChartLine, ChartPie } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TransactionService } from "../../service/transaction-service";
-import type { ReportCategoryDTO, ReportPersonDTO } from "../../models/transaction-model";
-import { getPorposeLabel } from "../../enums/porpose";
+import type {
+  ReportCategoryDTO,
+  ReportPersonDTO,
+} from "../../models/transaction-model";
+import { getPurposeLabel } from "../../enums/purpose";
 
 const transactionService = new TransactionService();
 
@@ -11,7 +14,8 @@ export default function TableReport() {
   const location = useLocation();
   const [isByPerson, setIsByPerson] = useState(true);
   const [report, setReport] = useState<ReportPersonDTO | null>(null);
-  const [reportCategory, setReportCategory] = useState<ReportCategoryDTO | null>(null);
+  const [reportCategory, setReportCategory] =
+    useState<ReportCategoryDTO | null>(null);
   const [loading, setLoading] = useState(false);
 
   const fetchData = async (isPerson: boolean) => {
@@ -73,13 +77,13 @@ export default function TableReport() {
   return (
     <section className="py-8 antialiased md:py-16">
       <div className="mx-auto max-w-7xl px-4 2xl:px-0">
-        <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl mb-6">
+        <h2 className="mb-6 text-xl font-semibold text-gray-900 sm:text-2xl">
           {isByPerson ? "Relatório por Pessoa" : "Relatório por Categoria"}
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* Lista de Pessoas/Categorias - 2 colunas */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="space-y-4 lg:col-span-2">
             {currentReport.financialTotals.map((item: any) => (
               <div
                 key={item.id}
@@ -90,11 +94,11 @@ export default function TableReport() {
                     <h3 className="text-base font-medium text-gray-900">
                       {isByPerson ? item.name : item.description}
                     </h3>
-                    <div className="flex items-center gap-4 mt-2 text-sm">
+                    <div className="mt-2 flex items-center gap-4 text-sm">
                       {!isByPerson && item.purpose && (
                         <>
                           <span className="text-gray-600">
-                            {getPorposeLabel(item.purpose)}
+                            {getPurposeLabel(item.purpose)}
                           </span>
                           <span className="text-gray-400">•</span>
                         </>
@@ -124,8 +128,8 @@ export default function TableReport() {
 
           {/* Resumo Geral - 1 coluna */}
           <div>
-            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6 sticky top-20">
-              <div className="flex items-center gap-2 mb-6">
+            <div className="sticky top-20 rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
+              <div className="mb-6 flex items-center gap-2">
                 {isByPerson ? (
                   <ChartLine className="h-5 w-5 text-green-500" />
                 ) : (

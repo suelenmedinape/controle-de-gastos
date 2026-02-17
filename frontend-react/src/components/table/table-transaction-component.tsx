@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import ModalTransaction, { useModal } from "../modal/modal-transaction-component";
+import ModalTransaction, {
+  useModal,
+} from "../modal/modal-transaction-component";
 import TableHeaders from "./table-headers-component";
 import { TransactionService } from "../../service/transaction-service";
 import type { listTransactionDTO } from "../../models/transaction-model";
-import { getPorposeLabel } from "../../enums/porpose";
+import { getPurposeLabel } from "../../enums/purpose";
 
 const transactionService = new TransactionService();
 
@@ -71,30 +73,35 @@ export default function TableTransaction() {
                   </tr>
                 ) : transactions.length > 0 ? (
                   transactions.map((transaction) => (
-                    <tr key={transaction.id} className="border-b hover:bg-gray-50">
+                    <tr
+                      key={transaction.id}
+                      className="border-b hover:bg-gray-50"
+                    >
                       <th className="px-4 py-3 font-medium whitespace-nowrap text-gray-900">
                         {transaction.description}
                       </th>
-                      <td className="px-4 py-3">
-                        {transaction.personName}
-                      </td>
+                      <td className="px-4 py-3">{transaction.personName}</td>
                       <td className="px-4 py-3">
                         {transaction.categoryDescription}
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          transaction.type === 2
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}>
-                          {getPorposeLabel(transaction.type)}
+                        <span
+                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                            transaction.type === 2
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
+                        >
+                          {getPurposeLabel(transaction.type)}
                         </span>
                       </td>
-                      <td className={`px-4 py-3 text-right font-medium ${
-                        transaction.type === 2
-                          ? "text-green-600"
-                          : "text-red-600"
-                      }`}>
+                      <td
+                        className={`px-4 py-3 text-right font-medium ${
+                          transaction.type === 2
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
                         {formatValue(transaction.value, transaction.type)}
                       </td>
                     </tr>

@@ -4,7 +4,7 @@ import { PersonService } from "../../service/person-service";
 import { CategoryService } from "../../service/category-service";
 import { createPersonSchema } from "../../models/person-model";
 import { createCategorySchema } from "../../models/category-model";
-import { Porpose } from "../../enums/porpose";
+import { Purpose } from "../../enums/purpose";
 
 export function useModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,22 +24,27 @@ export default function ModalNewItem({
   onPersonAdded,
   isPerson,
 }: ModalNewPersonProps) {
-  const [formData, setFormData] = useState({ 
-    name: "", 
+  const [formData, setFormData] = useState({
+    name: "",
     age: "",
     description: "",
-    purpose: Porpose.BOTH
+    purpose: Purpose.BOTH,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "age" || name === "purpose" 
-        ? (value ? parseInt(value, 10) : "") 
-        : value,
+      [name]:
+        name === "age" || name === "purpose"
+          ? value
+            ? parseInt(value, 10)
+            : ""
+          : value,
     }));
     if (errors[name]) {
       setErrors((prev) => {
@@ -67,7 +72,12 @@ export default function ModalNewItem({
         localStorage.setItem("id", userId);
         alert("Pessoa criada com sucesso");
 
-        setFormData({ name: "", age: "", description: "", purpose: Porpose.BOTH });
+        setFormData({
+          name: "",
+          age: "",
+          description: "",
+          purpose: Purpose.BOTH,
+        });
       } else {
         const validatedData = createCategorySchema.parse({
           description: formData.description,
@@ -77,7 +87,12 @@ export default function ModalNewItem({
         await categoryService.createCategory(validatedData);
         alert("Categoria criada com sucesso");
 
-        setFormData({ name: "", age: "", description: "", purpose: Porpose.BOTH });
+        setFormData({
+          name: "",
+          age: "",
+          description: "",
+          purpose: Purpose.BOTH,
+        });
       }
 
       onClose();
@@ -176,12 +191,16 @@ export default function ModalNewItem({
                       value={formData.name}
                       onChange={handleChange}
                       className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 ${
-                        errors.name ? "border-red-500 bg-red-50" : "border-gray-300"
+                        errors.name
+                          ? "border-red-500 bg-red-50"
+                          : "border-gray-300"
                       }`}
                       placeholder="João Silva"
                     />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-600">• {errors.name}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        • {errors.name}
+                      </p>
                     )}
                   </div>
 
@@ -199,12 +218,16 @@ export default function ModalNewItem({
                       value={formData.age}
                       onChange={handleChange}
                       className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 ${
-                        errors.age ? "border-red-500 bg-red-50" : "border-gray-300"
+                        errors.age
+                          ? "border-red-500 bg-red-50"
+                          : "border-gray-300"
                       }`}
                       placeholder="28"
                     />
                     {errors.age && (
-                      <p className="mt-1 text-sm text-red-600">• {errors.age}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        • {errors.age}
+                      </p>
                     )}
                   </div>
                 </>
@@ -225,12 +248,16 @@ export default function ModalNewItem({
                       value={formData.description}
                       onChange={handleChange}
                       className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ${
-                        errors.description ? "border-red-500 bg-red-50" : "border-gray-300"
+                        errors.description
+                          ? "border-red-500 bg-red-50"
+                          : "border-gray-300"
                       }`}
                       placeholder="Descrição da categoria"
                     />
                     {errors.description && (
-                      <p className="mt-1 text-sm text-red-600">• {errors.description}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        • {errors.description}
+                      </p>
                     )}
                   </div>
 
@@ -247,16 +274,20 @@ export default function ModalNewItem({
                       value={formData.purpose}
                       onChange={handleChange}
                       className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ${
-                        errors.purpose ? "border-red-500 bg-red-50" : "border-gray-300"
+                        errors.purpose
+                          ? "border-red-500 bg-red-50"
+                          : "border-gray-300"
                       }`}
                     >
                       <option value="">Selecione a finalidade</option>
-                      <option value={Porpose.EXPENSE}>Despesa</option>
-                      <option value={Porpose.INCOME}>Receita</option>
-                      <option value={Porpose.BOTH}>Ambas</option>
+                      <option value={Purpose.EXPENSE}>Despesa</option>
+                      <option value={Purpose.INCOME}>Receita</option>
+                      <option value={Purpose.BOTH}>Ambas</option>
                     </select>
                     {errors.purpose && (
-                      <p className="mt-1 text-sm text-red-600">• {errors.purpose}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        • {errors.purpose}
+                      </p>
                     )}
                   </div>
                 </>

@@ -1,11 +1,11 @@
 import z from "zod";
-import type { Porpose } from "../enums/porpose";
+import type { Purpose } from "../enums/purpose";
 
 export interface TransactionModel {
   id?: string;
   description: string;
   value: number;
-  type: Porpose;
+  type: Purpose;
   categoryId: string;
   personId: string;
 }
@@ -43,12 +43,16 @@ export interface ReportCategoryDTO {
 }
 
 export type createTransactionSchemaType = Omit<TransactionModel, "id">;
-export type listTransactionDTO = Omit<TransactionModel, "categoryId" | "personId"> & {
+export type listTransactionDTO = Omit<
+  TransactionModel,
+  "categoryId" | "personId"
+> & {
   categoryDescription: string;
   personName: string;
 };
 
-const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const guidRegex =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export const createTransactionSchema = z.object({
   description: z
@@ -58,20 +62,20 @@ export const createTransactionSchema = z.object({
   value: z
     .number()
     .positive("Valor deve ser positivo")
-    .refine(val => val >= 0.01, "Valor deve ser pelo menos 0.01"),
+    .refine((val) => val >= 0.01, "Valor deve ser pelo menos 0.01"),
   type: z
     .number()
     .int()
-    .refine(val => [1, 2, 3].includes(val), {
-      message: "Finalidade deve ser 1 (Despesa), 2 (Receita) ou 3 (Ambas)"
+    .refine((val) => [1, 2, 3].includes(val), {
+      message: "Finalidade deve ser 1 (Despesa), 2 (Receita) ou 3 (Ambas)",
     })
-    .transform(v => v as Porpose),
+    .transform((v) => v as Purpose),
   categoryId: z
     .string()
-    .refine(val => guidRegex.test(val), "CategoryId deve ser um GUID válido"),
+    .refine((val) => guidRegex.test(val), "CategoryId deve ser um GUID válido"),
   personId: z
     .string()
-    .refine(val => guidRegex.test(val), "PersonId deve ser um GUID válido"),
+    .refine((val) => guidRegex.test(val), "PersonId deve ser um GUID válido"),
 });
 
 export type CreateTransactionDTO = z.infer<typeof createTransactionSchema>;

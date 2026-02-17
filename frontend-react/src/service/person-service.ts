@@ -15,7 +15,7 @@ export class PersonService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao criar pessoa") as any;
+      const error = new Error("Erro ao adicionar pessoa ao sistema") as any;
       error.data = errorData;
       throw error;
     }
@@ -52,7 +52,7 @@ export class PersonService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao obter pessoas") as any;
+      const error = new Error("Erro ao obter lista de pessoas") as any;
       error.data = errorData;
       throw error;
     }
@@ -70,7 +70,7 @@ export class PersonService {
     
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao deletar pessoa") as any;
+      const error = new Error("Erro ao tentar deletar pessoa") as any;
       error.data = errorData;
       throw error;
     }

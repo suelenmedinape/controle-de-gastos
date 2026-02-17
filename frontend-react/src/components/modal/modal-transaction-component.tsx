@@ -4,7 +4,7 @@ import { TransactionService } from "../../service/transaction-service";
 import { PersonService } from "../../service/person-service";
 import { CategoryService } from "../../service/category-service";
 import { createTransactionSchema } from "../../models/transaction-model";
-import { getPorposeLabel, Porpose } from "../../enums/porpose";
+import { getPurposeLabel, Purpose } from "../../enums/purpose";
 import type { PersonModel } from "../../models/person-model";
 import type { CategoryModel } from "../../models/category-model";
 
@@ -30,7 +30,7 @@ export default function ModalTransaction({
     personId: "" as string,
     description: "",
     value: "" as string | number,
-    type: Porpose.EXPENSE as number,
+    type: Purpose.EXPENSE as number,
     categoryId: "" as string,
   });
   const [persons, setPersons] = useState<PersonModel[]>([]);
@@ -55,8 +55,7 @@ export default function ModalTransaction({
       ]);
       const personsData = personsRes.metadata.data || [];
       const categoriesData = categoriesRes.metadata.data || [];
-    
-      
+
       setPersons(personsData);
       setCategories(categoriesData);
     } catch (error) {
@@ -68,7 +67,7 @@ export default function ModalTransaction({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -90,6 +89,21 @@ export default function ModalTransaction({
     setLoading(true);
 
     try {
+      // Validar idade da pessoa
+      const selectedPerson = persons.find((p) => p.id === formData.personId);
+      if (selectedPerson && selectedPerson.age < 18) {
+        const type = parseInt(formData.type as any);
+        // Menores de 18 só podem fazer despesas
+        if (type !== Purpose.EXPENSE) {
+          setErrors({
+            submit:
+              "Pessoas menores de 18 anos podem fazer apenas despesas",
+          });
+          setLoading(false);
+          return;
+        }
+      }
+
       // Converter valores
       const value = parseFloat(formData.value as any);
       const categoryId = String(formData.categoryId); // Manter como string
@@ -112,7 +126,7 @@ export default function ModalTransaction({
         personId: "",
         description: "",
         value: "",
-        type: Porpose.EXPENSE,
+        type: Purpose.EXPENSE,
         categoryId: "",
       });
 
@@ -215,13 +229,16 @@ export default function ModalTransaction({
                   onChange={handleChange}
                   disabled={loadingData}
                   className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 ${
-                    errors.personId ? "border-red-500 bg-red-50" : "border-gray-300"
+                    errors.personId
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
                   }`}
                 >
                   <option value="">Selecione a pessoa</option>
                   {persons.map((person) => (
                     <option key={person.id} value={person.id}>
                       {person.name}
+                      {person.age < 18 ? " (menor de idade)" : ""}
                     </option>
                   ))}
                 </select>
@@ -278,7 +295,9 @@ export default function ModalTransaction({
                     value={formData.value}
                     onChange={handleChange}
                     className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ${
-                      errors.value ? "border-red-500 bg-red-50" : "border-gray-300"
+                      errors.value
+                        ? "border-red-500 bg-red-50"
+                        : "border-gray-300"
                     }`}
                     placeholder="0.00"
                   />
@@ -302,11 +321,13 @@ export default function ModalTransaction({
                     value={formData.type}
                     onChange={handleChange}
                     className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ${
-                      errors.type ? "border-red-500 bg-red-50" : "border-gray-300"
+                      errors.type
+                        ? "border-red-500 bg-red-50"
+                        : "border-gray-300"
                     }`}
                   >
-                    <option value={Porpose.EXPENSE}>Despesa</option>
-                    <option value={Porpose.INCOME}>Receita</option>
+                    <option value={Purpose.EXPENSE}>Despesa</option>
+                    <option value={Purpose.INCOME}>Receita</option>
                   </select>
                   {errors.type && (
                     <p className="mt-1 text-sm text-red-600">
@@ -339,7 +360,8 @@ export default function ModalTransaction({
                   <option value="">Selecione a categoria</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
-                      {category.description} ({getPorposeLabel(category.purpose)})
+                      {category.description} (
+                      {getPurposeLabel(category.purpose)})
                     </option>
                   ))}
                 </select>

@@ -15,7 +15,7 @@ export class CategoryService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao criar pessoa") as any;
+      const error = new Error("Erro ao adicionar categoria ao sistema") as any;
       error.data = errorData;
       throw error;
     }
@@ -33,7 +33,7 @@ export class CategoryService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao obter pessoas") as any;
+      const error = new Error("Erro ao obter lista de categorias") as any;
       error.data = errorData;
       throw error;
     }

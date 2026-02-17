@@ -1,5 +1,5 @@
 import type { ApiResponseModel } from "../models/api-response-model";
-import type { createTransactionSchemaType, listTransactionDTO, ReportCategoryDTO, ReportPersonDTO, TransactionModel } from "../models/transaction-model";
+import type { createTransactionSchemaType, listTransactionDTO, ReportCategoryDTO, ReportPersonDTO } from "../models/transaction-model";
 
 export class TransactionService {
   private readonly baseUrl: string = "http://localhost:5124/Transaction";
@@ -15,7 +15,7 @@ export class TransactionService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao criar pessoa") as any;
+      const error = new Error("Erro ao criar transferencia") as any;
       error.data = errorData;
       throw error;
     }
@@ -33,7 +33,7 @@ export class TransactionService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao obter pessoas") as any;
+      const error = new Error("Erro ao obter lista de transações") as any;
       error.data = errorData;
       throw error;
     }
@@ -51,7 +51,7 @@ export class TransactionService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao obter pessoas") as any;
+      const error = new Error("Erro ao obter relatório por pessoa") as any;
       error.data = errorData;
       throw error;
     }
@@ -69,7 +69,7 @@ export class TransactionService {
 
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao obter pessoas") as any;
+      const error = new Error("Erro ao obter relatório por categoria") as any;
       error.data = errorData;
       throw error;
     }
