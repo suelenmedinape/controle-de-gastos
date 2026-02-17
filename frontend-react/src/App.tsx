@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar/nav-bar-component";
-import TableRecords from "./components/Table/table-records-component";
-import TableTransaction from "./components/Table/table-transaction-component";
-import TableReport from "./components/Table/table-report-component";
+import NavBar from "./components/nav-bar/nav-bar-component";
+import TableRecords from "./components/table/table-records-component";
+import TableTransaction from "./components/table/table-transaction-component";
+import TableReport from "./components/table/table-report-component";
 
 export default function App() {
   return (

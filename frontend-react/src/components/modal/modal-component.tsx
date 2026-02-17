@@ -28,7 +28,7 @@ export default function ModalNewItem({
     name: "", 
     age: "",
     description: "",
-    purpose: Porpose.EXPENSE
+    purpose: Porpose.BOTH
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -57,7 +57,6 @@ export default function ModalNewItem({
 
     try {
       if (isPerson) {
-        // Validar e enviar pessoa
         const validatedData = createPersonSchema.parse({
           name: formData.name,
           age: formData.age,
@@ -68,18 +67,17 @@ export default function ModalNewItem({
         localStorage.setItem("id", userId);
         alert("Pessoa criada com sucesso");
 
-        setFormData({ name: "", age: "", description: "", purpose: Porpose.EXPENSE });
+        setFormData({ name: "", age: "", description: "", purpose: Porpose.BOTH });
       } else {
-        // Validar e enviar categoria
         const validatedData = createCategorySchema.parse({
           description: formData.description,
           purpose: formData.purpose,
         });
 
-        const response = await categoryService.createCategory(validatedData);
+        await categoryService.createCategory(validatedData);
         alert("Categoria criada com sucesso");
 
-        setFormData({ name: "", age: "", description: "", purpose: Porpose.EXPENSE });
+        setFormData({ name: "", age: "", description: "", purpose: Porpose.BOTH });
       }
 
       onClose();

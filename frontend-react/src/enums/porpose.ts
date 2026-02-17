@@ -5,9 +5,7 @@ export enum Porpose {
 }
 
 export function getPorposeLabel(purpose: Porpose | number | undefined | null): string {
-  const purposeNum = typeof purpose === 'string' ? parseInt(purpose, 10) : purpose;
-  
-  switch (purposeNum) {
+  switch (purpose) {
     case Porpose.EXPENSE:
     case 1:
       return "Despesa";

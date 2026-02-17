@@ -2,13 +2,13 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TableHeaders from "./table-headers-component";
-import ModalNewItem, { useModal } from "../modal/modal-component";
 import { PersonService } from "../../service/person-service";
 import type { PersonModel } from "../../models/person-model";
 import { CategoryService } from "../../service/category-service";
 import type { CategoryModel } from "../../models/category-model";
-import { getPorposeLabel } from "../../enums/porpose";
 import PurposeBadge from "../badges/purpose-component";
+import ModalNewItem, { useModal } from "../modal/modal-component";
+import ModalEditPerson, { useModalEdit } from "../modal/modal-edit-component";
 
 const personService = new PersonService();
 const categoryService = new CategoryService();
@@ -19,21 +19,20 @@ export default function TableRecords() {
   const [persons, setPersons] = useState<PersonModel[]>([]);
   const [categories, setCategories] = useState<CategoryModel[]>([]);
   const [loading, setLoading] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState<PersonModel | null>(null);
   const { isOpen, open, close } = useModal();
+  const { isOpen: isOpenEdit, open: openEdit, close: closeEdit } = useModalEdit();
 
-  const fetchs = async () => {
+  const fetchData = async (isPerson: boolean) => {
     try {
-      if (!isByPerson) {
-        setLoading(true);
-        const response = await categoryService.getAllCategories();
-        setCategories(response.metadata.data || []);
-        console.log(response.metadata.data || []);
-      } else {
-        setLoading(true);
+      setLoading(true);
+      if (isPerson) {
         const response = await personService.getAllPersons();
         setPersons(response.metadata.data || []);
+      } else {
+        const response = await categoryService.getAllCategories();
+        setCategories(response.metadata.data || []);
       }
-      
     } catch (error) {
       console.error(error);
       setCategories([]);
@@ -46,16 +45,41 @@ export default function TableRecords() {
   useEffect(() => {
     const newIsByPerson = location.pathname.includes("/person");
     setIsByPerson(newIsByPerson);
-    fetchs();
+    fetchData(newIsByPerson);
   }, [location.pathname]);
 
-  useEffect(() => {
-    fetchs();
-  }, []);
-
   const handlePersonAdded = () => {
-    fetchs();
+    fetchData(isByPerson);
     close();
+  };
+
+  const handlePersonUpdated = () => {
+    fetchData(isByPerson);
+    closeEdit();
+  };
+
+  const editPerson = (person: PersonModel) => () => {
+    setSelectedPerson(person);
+    openEdit();
+  };
+
+  const deletePerson = (id: string | undefined) => () => {
+    if (!id) return;
+    
+    if (!window.confirm("Tem certeza que deseja deletar esta pessoa?")) {
+      return;
+    }
+
+    personService
+      .deletePerson(id)
+      .then(() => {
+        setPersons((prev) => prev.filter((p) => p.id !== id));
+        alert("Pessoa deletada com sucesso");
+      })
+      .catch((error) => {
+        console.error("Erro ao deletar pessoa:", error);
+        alert("Erro ao tentar deletar pessoa");
+      });
   };
 
   return (
@@ -72,7 +96,9 @@ export default function TableRecords() {
                   <th className="px-4 py-3 text-right">
                     {isByPerson ? "Idade" : "Finalidade"}
                   </th>
-                  <th className="px-4 py-3 text-right">Ações</th>
+                  {isByPerson && (
+                    <th className="px-4 py-3 text-right">Ações</th>
+                  )}
                 </tr>
               </thead>
 
@@ -83,28 +109,45 @@ export default function TableRecords() {
                       Carregando...
                     </td>
                   </tr>
-                ) : (isByPerson ? persons.length > 0 : categories.length > 0) ? (
+                ) : (
+                    isByPerson ? persons.length > 0 : categories.length > 0
+                  ) ? (
                   (isByPerson ? persons : categories).map((item) => (
                     <tr key={item.id} className="border-b hover:bg-gray-50">
                       <th className="px-4 py-3 font-medium whitespace-nowrap text-gray-900">
-                        {isByPerson ? (item as PersonModel).name : (item as CategoryModel).description}
+                        {isByPerson
+                          ? (item as PersonModel).name
+                          : (item as CategoryModel).description}
                       </th>
                       <td className="px-4 py-3 text-right">
-                        {isByPerson 
-                          ? `${(item as PersonModel).age} anos` 
-                          : <PurposeBadge purpose={(item as CategoryModel).purpose} />
-                        }
+                        {isByPerson ? (
+                          `${(item as PersonModel).age} anos`
+                        ) : (
+                          <PurposeBadge
+                            purpose={(item as CategoryModel).purpose}
+                          />
+                        )}
                       </td>
-                      <td className="px-4 py-3 text-right">
-                        <div className="flex justify-end gap-3">
-                          <button className="text-green-600 transition hover:text-green-800">
-                            <Pencil className="h-5 w-5" />
-                          </button>
-                          <button className="text-red-600 transition hover:text-red-800">
-                            <Trash2 className="h-5 w-5" />
-                          </button>
-                        </div>
-                      </td>
+                      {isByPerson && (
+                        <td className="px-4 py-3 text-right">
+                          <div className="flex justify-end gap-3">
+                            <button
+                              onClick={editPerson(item as PersonModel)}
+                              className="text-green-600 transition hover:text-green-800"
+                              title="Editar pessoa"
+                            >
+                              <Pencil className="h-5 w-5" />
+                            </button>
+                            <button
+                              onClick={deletePerson((item as PersonModel).id)}
+                              className="text-red-600 transition hover:text-red-800"
+                              title="Deletar pessoa"
+                            >
+                              <Trash2 className="h-5 w-5" />
+                            </button>
+                          </div>
+                        </td>
+                      )}
                     </tr>
                   ))
                 ) : (
@@ -124,6 +167,12 @@ export default function TableRecords() {
         onClose={close}
         onPersonAdded={handlePersonAdded}
         isPerson={isByPerson}
+      />
+      <ModalEditPerson
+        isOpen={isOpenEdit}
+        onClose={closeEdit}
+        onPersonUpdated={handlePersonUpdated}
+        person={selectedPerson}
       />
     </section>
   );

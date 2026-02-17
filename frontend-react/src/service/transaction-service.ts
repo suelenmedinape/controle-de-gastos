@@ -1,10 +1,10 @@
 import type { ApiResponseModel } from "../models/api-response-model";
-import type { createPersonSchemaType, PersonModel } from "../models/person-model";
+import type { createTransactionSchemaType, listTransactionDTO, ReportCategoryDTO, ReportPersonDTO, TransactionModel } from "../models/transaction-model";
 
-export class PersonService {
-  private readonly baseUrl: string = "http://localhost:5124/Person";
+export class TransactionService {
+  private readonly baseUrl: string = "http://localhost:5124/Transaction";
 
-  async createPerson(data: createPersonSchemaType): Promise<ApiResponseModel> {
+  async createTransaction(data: createTransactionSchemaType): Promise<ApiResponseModel> {
     const response = await fetch(this.baseUrl, {
       method: "POST",
       headers: {
@@ -23,26 +23,7 @@ export class PersonService {
     return response.json();
   }
 
-  async updatePerson(id: string, data: createPersonSchemaType): Promise<ApiResponseModel> {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      const error = new Error("Erro ao atualizar pessoa") as any;
-      error.data = errorData;
-      throw error;
-    }
-
-    return response.json();
-  }
-
-  async getAllPersons(): Promise<ApiResponseModel<PersonModel[]>> {
+  async getAllTransaction(): Promise<ApiResponseModel<listTransactionDTO[]>> {
     const response = await fetch(this.baseUrl, {
       method: "GET",
       headers: {
@@ -60,19 +41,39 @@ export class PersonService {
     return response.json();
   }
 
-  async deletePerson(id: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
-      method: "DELETE",
+  async getAllTransactionPersons(): Promise<ApiResponseModel<ReportPersonDTO>> {
+    const response = await fetch(`${this.baseUrl}/ReportPerson`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json();
-      const error = new Error("Erro ao deletar pessoa") as any;
+      const error = new Error("Erro ao obter pessoas") as any;
       error.data = errorData;
       throw error;
     }
+
+    return response.json();
+  }
+
+  async getAllTransactionCategory(): Promise<ApiResponseModel<ReportCategoryDTO>> {
+    const response = await fetch(`${this.baseUrl}/ReportCategory`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const error = new Error("Erro ao obter pessoas") as any;
+      error.data = errorData;
+      throw error;
+    }
+
+    return response.json();
   }
 }

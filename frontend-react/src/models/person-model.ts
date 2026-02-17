@@ -8,6 +8,7 @@ export interface PersonModel {
 }
 
 export type CreatePersonDTO = Omit<Required<PersonModel>, "id" | "transactions">;
+export type UpdatePersonDTO = Partial<PersonModel> & { id: string };
 
 export const createPersonSchema = z.object({
   name: z
@@ -21,4 +22,44 @@ export const createPersonSchema = z.object({
     .min(1, "A idade deve ser maior que 0"),
 });
 
+export const updatePersonSchema = z.object({
+  id: z.string().uuid("ID inválido"),
+  name: z
+    .string()
+    .min(1, "O nome não pode estar vazio")
+    .trim(),
+  age: z
+    .number()
+    .int("A idade deve ser um número inteiro")
+    .positive("A idade deve ser um número positivo")
+    .min(1, "A idade deve ser maior que 0"),
+});
+
 export type createPersonSchemaType = z.infer<typeof createPersonSchema>;
+export type updatePersonSchemaType = z.infer<typeof updatePersonSchema>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
