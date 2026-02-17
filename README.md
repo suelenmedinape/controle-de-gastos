@@ -39,6 +39,9 @@ O objetivo deste sistema é auxiliar no controle financeiro doméstico, oferecen
 *   **Tratamento de Resultados:** FluentResults
 *   **Documentação da API:** Swagger/OpenAPI
 
+### Diagrama de classe
+![Diagrama](diagrama_classe.png)
+
 ### Configuração e Execução (Backend)
 
 1.  **Pré-requisitos:**
