@@ -18,6 +18,8 @@ public class MappingProfile : Profile
         CreateMap<Categories, ListCategoryDTO>();
         
         CreateMap<CreateTransactionDTO, Transaction>();
-        CreateMap<Transaction, ListAllTransactionsDTO>();
+        CreateMap<Transaction, ListAllTransactionsDTO>()
+            .ForMember(dest => dest.CategoryDescription, opt => opt.MapFrom(src => src.Category.Description))
+            .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.Name));
     }
 }

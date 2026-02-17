@@ -8,6 +8,6 @@ public class ListAllTransactionsDTO
     public string Description { get; set; }
     public decimal Value { get; set; }
     public Finance Type { get; set; }
-    public Guid CategoryId { get; set; }
-    public Guid PersonId { get; set; }
+    public string CategoryDescription { get; set; }
+    public string PersonName { get; set; }
 }

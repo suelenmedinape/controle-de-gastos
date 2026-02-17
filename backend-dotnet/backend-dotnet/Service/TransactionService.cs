@@ -25,7 +25,10 @@ public class TransactionService
     {
         try
         {
-            var transactions = await unit.TransactionRepository.ListAll();
+            var transactions = await unit.TransactionRepository.Query()
+                .Include(t => t.Category)
+                .Include(t => t.Person)
+                .ToListAsync();
             var transactionDto = mapper.Map<List<ListAllTransactionsDTO>>(transactions);
 
             return new Result()
