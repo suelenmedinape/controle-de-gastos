@@ -40,6 +40,9 @@ O objetivo deste sistema é auxiliar no controle financeiro doméstico, oferecen
 *   **Documentação da API:** Swagger/OpenAPI
 
 ### Diagrama de classe
+
+O banco de dados foi estruturado pensando na integridade referencial e escalabilidade. Abaixo, o diagrama de classes da solução:
+
 ![Diagrama](diagrama_classe.png)
 
 ### Configuração e Execução (Backend)
