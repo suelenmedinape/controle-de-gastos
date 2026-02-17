@@ -90,7 +90,7 @@ O banco de dados foi estruturado pensando na integridade referencial e escalabil
         ```bash
         dotnet run
         ```
-    *   A API estará disponível em `https://localhost:7124` (ou uma porta similar configurada). A documentação Swagger estará em `https://localhost:7124/swagger`.
+    *   A API estará disponível em `https://localhost:5124` (ou uma porta similar configurada). A documentação Swagger estará em `http://localhost:5124/swagger/index.html`.
 
 ### Endpoints da API
 
