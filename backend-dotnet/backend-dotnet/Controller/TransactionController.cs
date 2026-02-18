@@ -26,7 +26,7 @@ public class TransactionController : ControllerBase
         var result = await service.TransactionService.ListTransactions();
         return result.IsSuccess
             ? Ok(result.Successes.FirstOrDefault())
-            : StatusCode(404, result.Errors.FirstOrDefault());
+            : StatusCode(500, result.Errors.FirstOrDefault());
     }
 
     /// <summary>

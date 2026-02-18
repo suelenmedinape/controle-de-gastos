@@ -13,12 +13,6 @@ public class AppDbContext : DbContext
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder
-            .UseNpgsql("Host=localhost;Port=5432;Database=controledb;Username=suelen;Password=minhasenha");
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

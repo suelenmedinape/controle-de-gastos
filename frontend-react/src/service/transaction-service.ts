@@ -1,10 +1,18 @@
+import { API_BASE_URL } from "../core/url";
 import type { ApiResponseModel } from "../models/api-response-model";
-import type { createTransactionSchemaType, listTransactionDTO, ReportCategoryDTO, ReportPersonDTO } from "../models/transaction-model";
+import type {
+  createTransactionSchemaType,
+  listTransactionDTO,
+  ReportCategoryDTO,
+  ReportPersonDTO,
+} from "../models/transaction-model";
 
 export class TransactionService {
-  private readonly baseUrl: string = "http://localhost:5124/Transaction";
+  private readonly baseUrl: string = `${API_BASE_URL}/Transaction`;
 
-  async createTransaction(data: createTransactionSchemaType): Promise<ApiResponseModel> {
+  async createTransaction(
+    data: createTransactionSchemaType,
+  ): Promise<ApiResponseModel> {
     const response = await fetch(this.baseUrl, {
       method: "POST",
       headers: {
@@ -59,7 +67,9 @@ export class TransactionService {
     return response.json();
   }
 
-  async getAllTransactionCategory(): Promise<ApiResponseModel<ReportCategoryDTO>> {
+  async getAllTransactionCategory(): Promise<
+    ApiResponseModel<ReportCategoryDTO>
+  > {
     const response = await fetch(`${this.baseUrl}/ReportCategory`, {
       method: "GET",
       headers: {

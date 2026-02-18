@@ -1,8 +1,12 @@
+import { API_BASE_URL } from "../core/url";
 import type { ApiResponseModel } from "../models/api-response-model";
-import type { createPersonSchemaType, PersonModel } from "../models/person-model";
+import type {
+  createPersonSchemaType,
+  PersonModel,
+} from "../models/person-model";
 
 export class PersonService {
-  private readonly baseUrl: string = "http://localhost:5124/Person";
+  private readonly baseUrl: string = `${API_BASE_URL}/Person`;
 
   async createPerson(data: createPersonSchemaType): Promise<ApiResponseModel> {
     const response = await fetch(this.baseUrl, {
@@ -23,7 +27,10 @@ export class PersonService {
     return response.json();
   }
 
-  async updatePerson(id: string, data: createPersonSchemaType): Promise<ApiResponseModel> {
+  async updatePerson(
+    id: string,
+    data: createPersonSchemaType,
+  ): Promise<ApiResponseModel> {
     const response = await fetch(`${this.baseUrl}/${id}`, {
       method: "PUT",
       headers: {
@@ -67,7 +74,7 @@ export class PersonService {
         "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       const error = new Error("Erro ao tentar deletar pessoa") as any;

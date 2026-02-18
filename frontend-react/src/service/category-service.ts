@@ -1,10 +1,16 @@
+import { API_BASE_URL } from "../core/url";
 import type { ApiResponseModel } from "../models/api-response-model";
-import type { CategoryModel, createCategorySchemaType } from "../models/category-model";
+import type {
+  CategoryModel,
+  createCategorySchemaType,
+} from "../models/category-model";
 
 export class CategoryService {
-  private readonly baseUrl: string = "http://localhost:5124/Categories";
+  private readonly baseUrl: string = `${API_BASE_URL}/Categories`;
 
-  async createCategory(data: createCategorySchemaType): Promise<ApiResponseModel> {
+  async createCategory(
+    data: createCategorySchemaType,
+  ): Promise<ApiResponseModel> {
     const response = await fetch(this.baseUrl, {
       method: "POST",
       headers: {
